@@ -1,4 +1,4 @@
 nthorne-xmonad-environment
 ==========================
 
-My XMonad environment
+This repo contains my XMonad environment(s).
