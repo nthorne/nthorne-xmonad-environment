@@ -10,7 +10,7 @@ myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
     ]
 
-myLayoutHook = avoidStruts (Grid ||| Mirror tiled ||| simpleTabbed) ||| Full
+myLayoutHook = avoidStruts (Grid ||| Mirror tiled ||| tiled ||| simpleTabbed) ||| Full
   where
     tiled = Tall nmaster delta ratio
     nmaster = 1
