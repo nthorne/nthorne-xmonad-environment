@@ -3,12 +3,13 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Tabbed
 
 myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
     ]
 
-myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| Full) ||| Full
+myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| simpleTabbed) ||| Full
   where
     tiled = Tall nmaster delta ratio
     nmaster = 1
