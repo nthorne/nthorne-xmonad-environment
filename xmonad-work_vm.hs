@@ -39,7 +39,8 @@ myKeys =
   , ("M-S-h", spawn "xterm -ls -e ssh interflo@hermelin")
   , ("M-S-a", spawn "xterm -ls -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT; /usr/bin/zsh'")
   , ("M-S-t", spawn "xterm -ls -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT/Implementation/TCC_SW; /usr/bin/zsh'")
-  , ("M-S-i", spawn "xterm -ls -e ssh -t gbguxs04 'bin/irssi -c localhost'")
+  , ("M-S-i", spawn "xterm -ls -e ssh -t gbguxs04 'bin/irssi -c localhost'"),
+    ("M-d", spawn "xterm -ls -e notify-send \"$(date)\"")
   ]
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
