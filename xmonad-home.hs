@@ -23,6 +23,7 @@ myKeys =
   , ("M-S-h", spawn "sudo pm-hibernate")
   , ("M-z", spawn "gnome-screensaver-command --lock") 
   , ("M-p", spawn "dmenu_run")
+  , ("M-S-f", spawn "firefox")
   ]
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
