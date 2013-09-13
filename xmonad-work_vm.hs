@@ -46,15 +46,16 @@ main = do
 
 myKeys =
   [ ("M-p", spawn "dmenu_run")
-  , ("M-S-g", spawn "xterm -ls -e ssh -t gbguxs10 'source current_project.zsh ; test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT ; /usr/bin/zsh -l'")
-  , ("M-S-l", spawn "xterm -ls -e ssh -t interflo@lemmel 'cd Users/nthorne ; /bin/bash -l'")
-  , ("M-S-h", spawn "xterm -ls -e ssh interflo@hermelin")
-  , ("M-S-a", spawn "xterm -ls -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT; /usr/bin/zsh'")
-  , ("M-S-t", spawn "xterm -ls -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT/Implementation/TCC_SW; /usr/bin/zsh'")
-  , ("M-S-i", spawn "xterm -ls -e ssh -t gbguxs04 'bin/irssi -c localhost'")
+  , ("M-S-g", spawn "xterm -e ssh -t gbguxs10 'source current_project.zsh ; test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT ; /usr/bin/zsh -l'")
+  , ("M-S-l", spawn "xterm -e ssh -t interflo@lemmel 'cd Users/nthorne ; /bin/bash -l'")
+  , ("M-S-h", spawn "xterm -e ssh interflo@hermelin")
+  , ("M-S-a", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT; /usr/bin/zsh -l'")
+  , ("M-S-t", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT/Implementation/TCC_SW; /usr/bin/zsh -l'")
+  , ("M-S-i", spawn "xterm -e ssh -t gbguxs04 'bin/irssi -c localhost'")
   , ("M-d", spawn "notify-send \"$(date)\"")
-  , ("M-S-s", spawn "xterm -ls -e screen -S shared")
-  , ("M-S-x", spawn "xterm -ls -e screen -x shared")
+  , ("M-S-s", spawn "xterm -e /usr/bin/zsh -l -c 'screen -S shared'")
+  , ("M-S-x", spawn "xterm -e /usr/bin/zsh -l -c 'screen -x shared'")
+  , ("M-S-f", spawn "firefox")
   ]
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
