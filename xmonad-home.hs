@@ -20,7 +20,7 @@ main = do
 
 myKeys =
   [ ("M-S-q", spawn "gnome-session-quit")
-  , ("M-S-h", spawn "sudo pm-hibernate")
+  , ("M-S-h", spawn "gnome-session-quit --power-off")
   , ("M-z", spawn "gnome-screensaver-command --lock") 
   , ("M-p", spawn "dmenu_run")
   , ("M-S-f", spawn "firefox")
