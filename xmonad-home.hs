@@ -1,11 +1,14 @@
 import XMonad
 import XMonad.Config.Gnome
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig
 
 myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
     ]
+
+myLogHook = dynamicLogWithPP $ defaultPP
 
 main = do
   xmonad $ gnomeConfig
@@ -14,6 +17,7 @@ main = do
     , workspaces = myWorkspaces
     , modMask = mod4Mask
     , terminal = "xterm"
+    , logHook = myLogHook
     }
     `additionalKeysP` myKeys
 
