@@ -6,6 +6,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
 import XMonad.Layout.PerWorkspace (onWorkspaces)
+import qualified XMonad.Actions.FlexibleResize as Flex
 
 myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
@@ -42,6 +43,7 @@ main = do
     , logHook = myLogHook
     }
     `additionalKeysP` myKeys
+    `additionalMouseBindings` myMouse
 
 
 myKeys =
@@ -57,5 +59,8 @@ myKeys =
   , ("M-S-x", spawn "xterm -e /usr/bin/zsh -l -c 'screen -x shared'")
   , ("M-S-f", spawn "firefox")
   ]
+
+myMouse =
+  [ ((shiftMask, button1), (\w -> focus w >> Flex.mouseResizeWindow w))]
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
