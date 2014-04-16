@@ -54,7 +54,7 @@ myKeys =
   , ("M-S-a", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT; /usr/bin/zsh -l'")
   , ("M-S-t", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT/Implementation/TCC_SW; /usr/bin/zsh -l'")
   , ("M-S-i", spawn "xterm -e irssi -c gbguxs04 -p 6697")
-  , ("M-d", spawn "xterm -e bin/dual")
+  , ("M-S-d", spawn "xterm -e 'cd /media/sf_MyDocuments/; /usr/bin/zsh -l'")
   , ("M-S-s", spawn "xterm -e /usr/bin/zsh -l -c 'screen -S shared'")
   , ("M-S-x", spawn "xterm -e /usr/bin/zsh -l -c 'screen -x shared'")
   , ("M-S-f", spawn "firefox")
