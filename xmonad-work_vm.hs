@@ -49,7 +49,7 @@ main = do
 myKeys =
   [ ("M-p", spawn "dmenu_run")
   , ("M-S-g", spawn "xterm -e ssh -t gbguxs10 'source current_project.zsh ; test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT ; /usr/bin/zsh -l'")
-  , ("M-S-l", spawn "xterm -e ssh -t interflo@lemmel 'cd Users/nthorne ; /bin/bash -l'")
+  , ("M-S-l", spawn "xterm -e ssh -t interflo@gbgmullvad 'cd Users/nthorne ; /bin/bash -l'")
   , ("M-S-h", spawn "xterm -e ssh interflo@hermelin")
   , ("M-S-a", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT; /usr/bin/zsh -l'")
   , ("M-S-t", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT/Implementation/TCC_SW; /usr/bin/zsh -l'")
