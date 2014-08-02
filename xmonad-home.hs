@@ -7,6 +7,7 @@ import XMonad.Util.Run
 import XMonad.Actions.CopyWindow
 import XMonad.Prompt
 import XMonad.Prompt.Workspace
+import XMonad.Prompt.Shell
 
 myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
@@ -54,6 +55,7 @@ myKeys =
   , ("M-S-f", spawn "firefox")
   , ("M-d", workspacePrompt myXPConfig (windows . copy))
   , ("M-S-d", killAllOtherCopies)
+  , ("M-x", shellPrompt myXPConfig)
   ]
 
 myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
