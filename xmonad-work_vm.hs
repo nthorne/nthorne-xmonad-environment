@@ -7,10 +7,33 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.Grid
 import XMonad.Layout.PerWorkspace (onWorkspaces)
 import qualified XMonad.Actions.FlexibleResize as Flex
+import XMonad.Actions.CopyWindow
+import XMonad.Prompt
+import XMonad.Prompt.Workspace
+import XMonad.Prompt.Shell
 
 myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
     ]
+
+-- Main pallete
+colLight = "#d8d8d8"
+colDark = "#343d55"
+colVeryDark = "#000000"
+colTextLight = "#ffffff"
+colTextDark = "#bbbbbb"
+colBorderLight = colLight
+colBorderDark = colDark
+
+-- Same font as for a console
+--myFont = "-xos4-terminus-medium-r-*-*-14-*-*-*-*-*-*-*"
+
+myXPConfig :: XPConfig
+myXPConfig = defaultXPConfig
+  { bgColor     = colLight
+  , fgColor     = colVeryDark
+  , borderColor = colLight
+  }
 
 myDefaultLayout = avoidStruts (Grid ||| Mirror tiled ||| tiled ||| simpleTabbed) ||| Full
   where
@@ -37,7 +60,7 @@ main = do
   xmonad $ defaultConfig
     { manageHook = manageDocks <+> myManageHook
 		    <+> manageHook defaultConfig
-    , workspaces = myWorkspaces
+    , XMonad.workspaces = myWorkspaces
     , terminal = "xterm"
     , layoutHook = myLayoutHook
     , logHook = myLogHook
@@ -58,6 +81,9 @@ myKeys =
   , ("M-S-s", spawn "xterm -e /usr/bin/zsh -l -c 'screen -S shared'")
   , ("M-S-x", spawn "xterm -e /usr/bin/zsh -l -c 'screen -x shared'")
   , ("M-S-f", spawn "firefox")
+  , ("M-d", workspacePrompt myXPConfig (windows . copy))
+  , ("M-S-d", killAllOtherCopies)
+  , ("M-x", shellPrompt myXPConfig)
   ]
 
 myMouse =
