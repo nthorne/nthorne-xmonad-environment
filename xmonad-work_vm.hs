@@ -76,7 +76,7 @@ myKeys =
   , ("M-S-h", spawn "xterm -e ssh interflo@hermelin")
   , ("M-S-a", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT; /usr/bin/zsh -l'")
   , ("M-S-t", spawn "xterm -e 'source current_project.zsh && test -n $CURRENT_PROJECT_ROOT && cd $CURRENT_PROJECT_ROOT/**/TCC_SW; /usr/bin/zsh -l'")
-  , ("M-S-i", spawn "xterm -e /usr/bin/zsh -l -c 'screen irssi -c gbguxs04 -p 6697'")
+  , ("M-S-i", spawn "xterm -e /usr/bin/zsh -l -c 'screen irssi -c 10.160.155.5 -p 6697'")
   , ("M-S-d", spawn "xterm -e 'cd /media/sf_MyDocuments/; /usr/bin/zsh -l'")
   , ("M-S-s", spawn "xterm -e /usr/bin/zsh -l -c 'screen -S shared'")
   , ("M-S-x", spawn "xterm -e /usr/bin/zsh -l -c 'screen -x shared'")
