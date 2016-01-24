@@ -8,6 +8,7 @@ import XMonad.Actions.CopyWindow
 import XMonad.Prompt
 import XMonad.Prompt.Workspace
 import XMonad.Prompt.Shell
+import XMonad.Hooks.SetWMName
 
 myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
@@ -43,6 +44,7 @@ main = do
     , modMask = mod4Mask
     , terminal = "xterm"
     , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn dzenLeftBar }
+    , startupHook = setWMName "LG3D"
     }
     `additionalKeysP` myKeys
 
