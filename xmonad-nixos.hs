@@ -59,8 +59,8 @@ myLayoutHook = onWorkspaces ["1", "2", "3"] myCustomSizedLayout $
 
 main = do
   -- dzenLeftBar <- spawnPipe ("dzen2 -dock -x '0' -ta 'l' -fn " ++ myFont)
-  dzenLeftBar <- spawnPipe ("dzen2 -dock -x '0' -w '770' -ta 'l' -fn " ++ myFont)
-  dzenRightBar <- spawnPipe ("conky | dzen2 -dock -x '770' -w '770' -ta 'r' -fn " ++ myFont)
+  dzenLeftBar <- spawnPipe ("dzen2 -dock -x '0' -w '700' -ta 'l' -fn " ++ myFont)
+  dzenRightBar <- spawnPipe ("conky | dzen2 -dock -x '700' -w '770' -ta 'r' -fn " ++ myFont)
   xmonad $ defaultConfig
     { manageHook = manageDocks <+> myManageHook
 		     -- <+> manageHook defaultConfig
