@@ -30,7 +30,7 @@ colBorderLight = colLight
 colBorderDark = colDark
 
 -- Same font as for a console
-myFont = "-xos4-terminus-medium-r-*-*-14-*-*-*-*-*-*-*"
+myFont = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
 
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig
