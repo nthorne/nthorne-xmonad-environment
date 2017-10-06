@@ -29,7 +29,7 @@ colBorderDark = colDark
 
 
 -- Same font as for a console
-myFont = "-*-terminus-medium-r-*-*-14-*-*-*-*-*-*-*"
+myFont = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
 
 
 myXPConfig = defaultXPConfig
