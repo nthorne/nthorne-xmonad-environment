@@ -61,8 +61,6 @@ myLayoutHook = onWorkspaces ["1", "2", "3"] myCustomSizedLayout $
 
 myKeys =
   [ ("M-p", spawn "dmenu_run")
-  , ("M-S-i", spawn "xterm -e /usr/bin/env zsh -l -c 'irssi_wrapper.sh'")
-  , ("M-S-s", spawn "xterm -e /usr/bin/env zsh -l -c 'tmux new-session -s shared'")
   , ("M-S-f", spawn "firefox")
   , ("M-b", sendMessage ToggleStruts)
   , ("M-d", workspacePrompt myXPConfig (windows . copy))
@@ -85,7 +83,7 @@ main = do
     { manageHook = manageDocks <+> myManageHook
 		     -- <+> manageHook defaultConfig
     , XMonad.workspaces = myWorkspaces
-    , terminal = "xterm"
+    , terminal = "kitty"
     , layoutHook = myLayoutHook
     , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn dzenLeftBar }
     , handleEventHook = docksEventHook
