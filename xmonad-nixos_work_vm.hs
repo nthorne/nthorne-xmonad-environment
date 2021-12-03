@@ -62,7 +62,7 @@ main = do
   xmonad $ desktopConfig
     { manageHook = myManageHook <+> manageDocks <+> manageHook desktopConfig
     , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
-    , terminal = "xterm"
+    , terminal = "kitty"
     , XMonad.workspaces = myWorkspaces
     , layoutHook = avoidStruts $ myLayoutHook
     , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn dzenLeftBar }
@@ -73,8 +73,6 @@ main = do
 
 myKeys =
   [ ("M-p", spawn "dmenu_run")
-  , ("M-S-i", spawn "xterm -e /usr/bin/env zsh -l -c 'irssi_wrapper.sh'")
-  , ("M-S-s", spawn "xterm -e /usr/bin/env zsh -l -c 'tmux new-session -s shared'")
   , ("M-S-f", spawn "firefox")
   , ("M-b", sendMessage ToggleStruts)
   , ("M-d", workspacePrompt myXPConfig (windows . copy))
