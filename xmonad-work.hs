@@ -1,23 +1,29 @@
+import System.Exit
+
 import XMonad
-import XMonad.Hooks.ManageDocks
-import XMonad.Util.EZConfig
+import XMonad.Actions.CopyWindow
+import qualified XMonad.Actions.FlexibleResize as Flex
+import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.DynamicLog (dzen)
 import XMonad.Hooks.ManageDocks
-import XMonad.Layout.Tabbed
+import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Grid
 import XMonad.Layout.PerWorkspace (onWorkspaces)
-import qualified XMonad.Actions.FlexibleResize as Flex
-import XMonad.Actions.CopyWindow
+import XMonad.Layout.Tabbed
 import XMonad.Prompt
-import XMonad.Prompt.Workspace
 import XMonad.Prompt.Shell
-import XMonad.Util.Run
-import XMonad.Config.Desktop
+import XMonad.Prompt.Workspace
 import XMonad.StackSet as W
+import XMonad.Util.EZConfig
+import XMonad.Util.Run
+
 
 myManageHook = composeAll
     [ title =? "Run Application" --> doFloat  -- cause the app runner to float
+    , className =? "Thunderbird" --> doShift "5:mail"
+    , className =? "Slack"       --> doShift "6:slack"
+    , className =? "Microsoft Teams - Preview" --> doShift "7:teams"
     , manageDocks
     ]
 
@@ -30,14 +36,17 @@ colTextDark = "#bbbbbb"
 colBorderLight = colLight
 colBorderDark = colDark
 
--- Same font as for a console
-myFont = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
+myFontSize = 24
+myFont = "-*-terminus-medium-r-*-*-"++(show myFontSize) ++"-*-*-*-*-*-*-*"
+myXFTFont = "Terminus-"++(show myFontSize)
 
 myXPConfig :: XPConfig
 myXPConfig = defaultXPConfig
   { bgColor     = colLight
   , fgColor     = colVeryDark
   , borderColor = colLight
+  , font        = "xft:" ++ myXFTFont
+  , height      = myFontSize + (myFontSize `div` 3)
   }
 
 myDefaultLayout = (Grid ||| Mirror tiled ||| tiled ||| simpleTabbed) ||| Full
@@ -58,29 +67,41 @@ myLayoutHook = onWorkspaces ["1", "2", "3"] myCustomSizedLayout $
   myDefaultLayout
 
 
+myStatsBarWidth = 800
+
 main = do
-  dzenLeftBar <- spawnPipe ("dzen2 -dock -x '0' -ta 'l' -fn " ++ myFont)
+  dzenStatsBar <- spawnPipe ("conky | dzen2 -x '0' -w '"++(show myStatsBarWidth)++"' -ta 'l' -fn " ++ myFont)
+  dzenDesktopsBar <- spawnPipe ("dzen2 -dock -x '"++(show myStatsBarWidth)++"' -ta 'l' -fn " ++ myFont)
   xmonad $ desktopConfig
     { manageHook = myManageHook <+> manageDocks <+> manageHook desktopConfig
     , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
+    -- Currently OpenGL driver are a tad broken on NixOS 😢
     -- , terminal = "kitty"
     , terminal = "xterm"
     , XMonad.workspaces = myWorkspaces
     , layoutHook = avoidStruts $ myLayoutHook
-    , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn dzenLeftBar }
+    , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn dzenDesktopsBar }
     }
     `additionalKeysP` myKeys
     `additionalMouseBindings` myMouse
 
-
 myKeys =
-  [ ("M-p", spawn "dmenu_run")
-  , ("M-S-f", spawn "firefox")
+  [ ("M-p", safeSpawn "dmenu_run" ["-fn", myXFTFont])
   , ("M-b", sendMessage ToggleStruts)
   , ("M-d", workspacePrompt myXPConfig (windows . copy))
   , ("M-S-d", killAllOtherCopies)
   , ("M-x", shellPrompt myXPConfig)
+  , ("M-S-f", spawn "firefox")
   , ("M-S-l", spawn "sudo slock")
+  , ("M-S-s", spawn "nvidia-offload slack")
+  , ("M-S-t", spawn "nvidia-offload teams")
+  , ("<XF86AudioRaiseVolume>",  spawn "amixer sset Master 3%+")
+  , ("<XF86AudioLowerVolume>",  spawn "amixer sset Master 3%-")
+  , ("<XF86AudioMute>",         spawn "amixer sset Master toggle")
+  , ("<XF86MonBrightnessUp>",   safeSpawn "xbacklight" ["-inc", "10"])
+  , ("<XF86MonBrightnessDown>", safeSpawn "xbacklight" ["-dec","10"])
+  , ("M-S-q", io (exitWith ExitSuccess))
+  , ("M-q", restart "xmonad" True)
   ]
   ++
   [ (mask ++ "M-" ++ [key], screenWorkspace scr >>= flip whenJust (windows . action))
@@ -91,4 +112,4 @@ myKeys =
 myMouse =
   [ ((shiftMask, button1), (\w -> XMonad.focus w >> Flex.mouseResizeWindow w))]
 
-myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+myWorkspaces = ["1", "2", "3", "4", "5:mail", "6:slack", "7:teams", "8:web", "9:web"]
