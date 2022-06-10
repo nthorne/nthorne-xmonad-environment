@@ -41,7 +41,7 @@ myFont = "-*-terminus-medium-r-*-*-"++(show myFontSize) ++"-*-*-*-*-*-*-*"
 myXFTFont = "Terminus-"++(show myFontSize)
 
 myXPConfig :: XPConfig
-myXPConfig = defaultXPConfig
+myXPConfig = def
   { bgColor     = colLight
   , fgColor     = colVeryDark
   , borderColor = colLight
@@ -75,12 +75,11 @@ main = do
   xmonad $ desktopConfig
     { manageHook = myManageHook <+> manageDocks <+> manageHook desktopConfig
     , handleEventHook = docksEventHook <+> handleEventHook desktopConfig
-    -- Currently OpenGL driver are a tad broken on NixOS 😢
-    -- , terminal = "kitty"
-    , terminal = "xterm"
+    , terminal = "kitty"
+    -- , terminal = "xterm"
     , XMonad.workspaces = myWorkspaces
     , layoutHook = avoidStruts $ myLayoutHook
-    , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn dzenDesktopsBar }
+    , logHook = dynamicLogWithPP $ def { ppOutput = hPutStrLn dzenDesktopsBar }
     }
     `additionalKeysP` myKeys
     `additionalMouseBindings` myMouse
