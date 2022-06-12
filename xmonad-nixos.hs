@@ -1,15 +1,16 @@
 import XMonad
-import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings)
-import XMonad.Hooks.DynamicLog (ppOutput, dynamicLogWithPP, defaultPP)
+import XMonad.Actions.CopyWindow (copy, killAllOtherCopies)
+import qualified XMonad.Actions.FlexibleResize as Flex
+import XMonad.Config.Desktop
+import XMonad.Hooks.DynamicLog (ppOutput, dynamicLogWithPP)
 import XMonad.Hooks.ManageDocks
-import XMonad.Layout.Tabbed (simpleTabbed)
 import XMonad.Layout.Grid
 import XMonad.Layout.PerWorkspace (onWorkspaces)
-import qualified XMonad.Actions.FlexibleResize as Flex
-import XMonad.Actions.CopyWindow (copy, killAllOtherCopies)
+import XMonad.Layout.Tabbed (simpleTabbed)
 import XMonad.Prompt
-import XMonad.Prompt.Workspace
 import XMonad.Prompt.Shell
+import XMonad.Prompt.Workspace
+import XMonad.Util.EZConfig (additionalKeysP, additionalMouseBindings)
 import XMonad.Util.Run
 
 
@@ -32,7 +33,7 @@ colBorderDark = colDark
 myFont = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*"
 
 
-myXPConfig = defaultXPConfig
+myXPConfig = def
   { bgColor     = colLight
   , fgColor     = colVeryDark
   , borderColor = colLight
@@ -79,13 +80,13 @@ main = do
   -- dzenLeftBar <- spawnPipe ("dzen2 -dock -x '0' -ta 'l' -fn " ++ myFont)
   dzenLeftBar <- spawnPipe ("dzen2 -dock -x '0' -w '600' -ta 'l' -fn " ++ myFont)
   dzenRightBar <- spawnPipe ("conky | dzen2 -dock -x '600' -w '766' -ta 'r' -fn " ++ myFont)
-  xmonad $ defaultConfig
+  xmonad $ desktopConfig
     { manageHook = manageDocks <+> myManageHook
-		     -- <+> manageHook defaultConfig
+      -- <+> manageHook defaultConfig
     , XMonad.workspaces = myWorkspaces
     , terminal = "kitty"
     , layoutHook = myLayoutHook
-    , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn dzenLeftBar }
+    , logHook = dynamicLogWithPP $ def { ppOutput = hPutStrLn dzenLeftBar }
     , handleEventHook = docksEventHook
     }
     `additionalKeysP` myKeys
